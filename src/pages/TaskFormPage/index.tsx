@@ -4,11 +4,13 @@ import { ActionType } from "../../core/reducers/task_reducer";
 import { Task } from "../TasksPage/interfaces/task";
 import { TaskService } from "../../core/services/task_service";
 import { ulid } from "ulid";
+import { useNavigate } from "react-router-dom";
 
 export function TaskFormPage() {
     const inputTaskNameRef = useRef<HTMLInputElement>(null);
     const inputTaskDescriptionRef = useRef<HTMLInputElement>(null);
     const dispatch = useTasksDispatcher();
+    const navigate = useNavigate();
 
 
     const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -26,6 +28,7 @@ export function TaskFormPage() {
         inputTaskDescriptionRef.current!.value = "";
         inputTaskNameRef.current!.focus();
         TaskService.addTask(newTask).then((task) => dispatch({type: ActionType.ADDED, payload: {task}}));
+        navigate("/tasks");
 
         
 

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import { useTasksDispatcher } from "../../core/hooks/use_tasks_dispatcher";
 import { ActionType } from "../../core/reducers/task_reducer";
 import { TaskService } from "../../core/services/task_service";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Task } from "../TasksPage/interfaces/task";
 
 export function TaskDetailsPage() {
@@ -13,7 +13,7 @@ export function TaskDetailsPage() {
   const refTaskDescriptionInput = useRef<HTMLInputElement>(null);
 
   const { id } = useParams();
-  // console.log("Executando1: %s", id);
+  const navigate = useNavigate();
 
   const getTaskDetails = useCallback(async () => {
     try {
@@ -41,6 +41,7 @@ export function TaskDetailsPage() {
 
   const handleTaskDelete = () => {
     TaskService.deleteTask(task!.id).then(() => dispatch({ type: ActionType.DELETED, payload: { id: task!.id } }));
+    navigate("/tasks");
   };
 
   useEffect(() => {
@@ -59,15 +60,13 @@ export function TaskDetailsPage() {
     <>
       <h2>Task Details</h2>
       <div>
-        {isEditing ? <input type="text" ref={refTaskNameInput}/> : <h4>{task?.name}</h4>}
+        {isEditing ? <input type="text" ref={refTaskNameInput} /> : <h4>{task?.name}</h4>}
 
-        {isEditing ? <input type="text" ref={refTaskDescriptionInput}/> : <p>{task?.description}</p>}
+        {isEditing ? <input type="text" ref={refTaskDescriptionInput} /> : <p>{task?.description}</p>}
+        <p>{task?.createdAt.toString()}</p>
       </div>
 
-      <Link to="/tasks" onClick={handleTaskDelete}>
-        Remover
-      </Link>
-      {/* <button onClick={handleTaskDelete}>Remover</button> */}
+      <button onClick={handleTaskDelete}>Remover</button>
       <button onClick={handleSaveOrEdit}>{labelEditOrSave}</button>
     </>
   );
