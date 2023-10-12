@@ -42,8 +42,15 @@ async function deleteTask(id: string): Promise<void> {
     return deletedTask;
 }
 
+async function getTask(id: string): Promise<Task> {
+    const response = await fetch(`${baseUrl}/tasks/${id}`);
+    const task = await response.json();
+    return task;
+}
+
 export const TaskService = {
     listAllTasks,
+    getTask,
     addTask,
     updateTask,
     deleteTask
