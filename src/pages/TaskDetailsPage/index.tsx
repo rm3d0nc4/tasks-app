@@ -3,7 +3,7 @@ import { useTasksDispatcher } from "../../core/hooks/use_tasks_dispatcher";
 import { ActionType } from "../../core/reducers/task_reducer";
 import { TaskService } from "../../core/services/task_service";
 import { useNavigate, useParams } from "react-router-dom";
-import { Task } from "../TasksPage/interfaces/task";
+import { Task } from "../../core/interfaces/task";
 
 export function TaskDetailsPage() {
   const dispatch = useTasksDispatcher();

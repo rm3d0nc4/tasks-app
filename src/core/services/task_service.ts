@@ -1,4 +1,4 @@
-import { Task } from "../../pages/TasksPage/interfaces/task";
+import { Task } from "../interfaces/task";
 
 const baseUrl = "http://localhost:3000";
 

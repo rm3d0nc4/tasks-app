@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useTasksDispatcher } from "../../core/hooks/use_tasks_dispatcher";
 import { ActionType } from "../../core/reducers/task_reducer";
-import { Task } from "../TasksPage/interfaces/task";
+import { Task } from "../../core/interfaces/task";
 import { TaskService } from "../../core/services/task_service";
 import { ulid } from "ulid";
 import { useNavigate } from "react-router-dom";

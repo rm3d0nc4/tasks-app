@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useTasksDispatcher } from "../../../../core/hooks/use_tasks_dispatcher";
 import { ActionType } from "../../../../core/reducers/task_reducer";
 import { TaskService } from "../../../../core/services/task_service";
-import { Task } from "../../interfaces/task";
+import { Task } from "../../../../core/interfaces/task";
 
 interface TaskListItemProps {
   task: Task;

@@ -1,4 +1,4 @@
-import { Task } from "../../pages/TasksPage/interfaces/task";
+import { Task } from "../interfaces/task";
 
 interface TaskState {
     tasks: Task[];
