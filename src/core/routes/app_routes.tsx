@@ -5,6 +5,7 @@ import { TaskPage } from "../../pages/TasksPage";
 import { TaskFormPage } from "../../pages/TaskFormPage";
 import { TaskDetailsPage } from "../../pages/TaskDetailsPage";
 import { Header } from "../components/Header";
+import { ProtectedRoute } from "../wrappers/protected_route";
 
 export function AppRoutes() {
   const router = createBrowserRouter([
@@ -20,10 +21,41 @@ export function AppRoutes() {
           path: "/",
           element: <HomePage />,
         },
-        { path: "login", element: <LoginPage /> },
-        { path: "new-task", element: <TaskFormPage /> },
-        { path: "tasks", element: <TaskPage /> },
-        { path: "tasks/:id", element: <TaskDetailsPage /> },
+        {
+          path: "login",
+          element: (
+              <LoginPage />
+          ),
+        },
+        {
+          path: "new-task",
+          element: (
+            <ProtectedRoute>
+              <TaskFormPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "tasks",
+          children: [
+            {
+              index: true,
+              element: (
+                <ProtectedRoute>
+                  <TaskPage />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: ":id",
+              element: (
+                <ProtectedRoute>
+                  <TaskDetailsPage />
+                </ProtectedRoute>
+              ),
+            },
+          ],
+        },
       ],
     },
     { path: "*", element: <h1>Not Found</h1> },
